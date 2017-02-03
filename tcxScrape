@@ -8,7 +8,7 @@ z3 = 154
 z4 = 173
 z5 = 220
 
-sufferArr = []
+scoreArr = []
 avgHR = []
 
 path = "/Users/Tom/Desktop/StravaFiles/"
@@ -55,21 +55,21 @@ for filename in os.listdir(path):
 
     #Won't calc. 0 suffer score if file is not .tcx i.e. if it is results file
     if startRec != False:
-        sufferscore =       (12 / 3600) * tz1 * (totSec / instHRM) \
+        score =       (12 / 3600) * tz1 * (totSec / instHRM) \
                             + (24 / 3600) * tz2 * (totSec / instHRM) \
                             + (45 / 3600) * tz3 * (totSec / instHRM) \
                             + (100 / 3600) * tz4 * (totSec / instHRM) \
                             + (120 / 3600) * tz5 * (totSec / instHRM)
         #Modified from http://djconnel.blogspot.co.uk/2011/08/strava-suffer-score-decoded.html
         #Need to make zone weightings variable
-        sufferArr.append(sufferscore)
+        scoreArr.append(score)
         avgHR.append(totalHRM/instHRM)
         f.close()
 
 #Create .CSV file
 n = open(path+"Results.csv","w")
-n.write("Ride,Suffer Score, Average BPM\n")
-for i in range(len(sufferArr)):
-    n.write(str(i+1)+","+str(sufferArr[i])+","+str(avgHR[i])+'\n')
+n.write("Ride,Effort Score, Average BPM\n")
+for i in range(len(scoreArr)):
+    n.write(str(i+1)+","+str(scoreArr[i])+","+str(avgHR[i])+'\n')
 n.close()
 print("Success!")
